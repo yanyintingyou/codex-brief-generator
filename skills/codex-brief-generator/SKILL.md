@@ -21,7 +21,7 @@ Use this skill to turn a user's request into a high-quality, self-contained inst
 - **Codex CLI** acts as the local execution agent that edits files, runs commands, tests code, and reports results.
 - **The user** may manually copy the generated brief into Windows Codex or WSL Codex, especially for long-running tasks or tasks requiring local Windows applications.
 
-The output must be usable even if Codex has no access to the current Hermes conversation. Write the brief as a standalone document with enough background, paths, scope, constraints, validation steps, and final-report requirements.
+The output must be self-contained and usable by Codex without relying on any prior chat state. Write the brief as a standalone document with enough background, paths, scope, constraints, validation steps, and final-report requirements.
 
 ## When to Use
 
