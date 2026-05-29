@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Brief Generator"
+  short_description: "AgentSkills-compatible skill: codex-brief-generator"
+  default_prompt: "Use $codex-brief-generator and follow SKILL.md."

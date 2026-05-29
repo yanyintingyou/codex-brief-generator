@@ -6,6 +6,30 @@
 
 它服务于一种很实用的双 Agent 工作流：Hermes 负责研究总控、任务拆解和提示词规划；Codex CLI 负责在本地执行，修改文件、运行命令、验证结果，并把结果汇报回来。
 
+## 跨 Agent 兼容结构与安装
+
+本仓库现在使用双布局 skill 结构：
+
+```text
+repo/
+├── SKILL.md                                      # 跨 Agent 通用的权威说明
+├── AGENTS.md                                    # Codex / OpenAI 项目指令
+├── CLAUDE.md                                    # Claude Code 项目指令
+├── agents/openai.yaml                           # 可选 OpenAI agent 元数据
+└── skills/autonomous-ai-agents/codex-brief-generator/SKILL.md  # Hermes / OpenClaw 打包版 skill
+```
+
+根目录 `SKILL.md` 与 `skills/autonomous-ai-agents/codex-brief-generator/SKILL.md` 会保持字节级一致。若有脚本、参考文档或依赖文件，它们也会同时出现在两个可安装位置旁边。
+
+### 作为可复用 skill 安装
+
+- **Claude Code**：复制 `skills/autonomous-ai-agents/codex-brief-generator/` 到 `~/.claude/skills/autonomous-ai-agents/codex-brief-generator/`。
+- **OpenAI Codex / OpenAI agents**：在本仓库工作时保留 `AGENTS.md`；如需作为可复用 skill，复制 `skills/autonomous-ai-agents/codex-brief-generator/` 到 `~/.agents/skills/autonomous-ai-agents/codex-brief-generator/`。
+- **OpenClaw**：复制 `skills/autonomous-ai-agents/codex-brief-generator/` 到 `<workspace>/skills/autonomous-ai-agents/codex-brief-generator/`、`<workspace>/.agents/skills/autonomous-ai-agents/codex-brief-generator/` 或 `~/.openclaw/skills/autonomous-ai-agents/codex-brief-generator/`。
+- **Hermes Agent**：复制 `skills/autonomous-ai-agents/codex-brief-generator/` 到 `~/.hermes/skills/autonomous-ai-agents/codex-brief-generator/`，然后开启新的 Hermes 会话。
+- **通用 AgentSkills 加载器**：使用包含 `SKILL.md` 的目录；skill 名称为 `codex-brief-generator`。
+
+
 ## 动因
 
 长时间运行的本地代码任务、数据处理任务，往往不适合完全塞进一次远程 Agent 对话里。实际使用中经常会遇到三个问题：
@@ -54,7 +78,7 @@
         └── SKILL.md
 ```
 
-其中 `skills/codex-brief-generator/SKILL.md` 是正式的 skill 文件。
+其中 `skills/autonomous-ai-agents/codex-brief-generator/SKILL.md` 是正式的 skill 文件。
 
 ## 在 Hermes 中安装
 
@@ -97,7 +121,7 @@ Hermes 直接调用 Codex 适合短任务、边界清楚的仓库修改。但对
 这个仓库遵循 Hermes 期望的 Agent Skills 目录结构：
 
 ```text
-skills/<skill-name>/SKILL.md
+skills/<category>/<skill-name>/SKILL.md
 ```
 
 skill 本身是带 YAML frontmatter 的 Markdown 指令文件，因此也可以改造成其他支持 skill-style instruction pack 的 Agent 运行时使用。

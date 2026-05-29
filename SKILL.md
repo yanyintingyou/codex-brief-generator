@@ -5,10 +5,7 @@ version: 1.0.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
-metadata:
-  hermes:
-    tags: [codex, prompt-generation, task-brief, windows, wsl, coding-agent]
-    related_skills: [codex, hermes-agent, writing-plans, test-driven-development]
+metadata: {"hermes":{"category":"autonomous-ai-agents","tags":["codex","prompt-generation","task-brief","windows","wsl","coding-agent"],"related_skills":["codex","hermes-agent","writing-plans"]},"openclaw":{"homepage":"https://github.com/yanyintingyou/codex-brief-generator"},"compatibility":{"agents":["Hermes Agent","Claude Code","OpenAI Codex","OpenClaw","generic AgentSkills loaders"]}}
 ---
 
 # Codex Brief Generator

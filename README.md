@@ -6,6 +6,30 @@ A Hermes / Agent Skills compatible skill for generating self-contained task brie
 
 This skill is designed for a practical two-agent workflow: Hermes acts as the research lead and task planner, while Codex CLI acts as the local execution agent that edits files, runs commands, validates results, and reports back.
 
+## Cross-agent compatibility and installation
+
+This repository now uses a dual-layout skill structure:
+
+```text
+repo/
+├── SKILL.md                                      # canonical cross-agent instructions
+├── AGENTS.md                                    # Codex/OpenAI project instructions
+├── CLAUDE.md                                    # Claude Code project instructions
+├── agents/openai.yaml                           # optional OpenAI agent metadata
+└── skills/autonomous-ai-agents/codex-brief-generator/SKILL.md  # Hermes/OpenClaw packaged skill copy
+```
+
+The root `SKILL.md` and the packaged `skills/autonomous-ai-agents/codex-brief-generator/SKILL.md` are intentionally byte-identical. Supporting files, when present, are available next to both copies.
+
+### Install as a reusable skill
+
+- **Claude Code**: copy `skills/autonomous-ai-agents/codex-brief-generator/` to `~/.claude/skills/autonomous-ai-agents/codex-brief-generator/`.
+- **OpenAI Codex / OpenAI agents**: keep `AGENTS.md` when working in this repository, or copy `skills/autonomous-ai-agents/codex-brief-generator/` to `~/.agents/skills/autonomous-ai-agents/codex-brief-generator/` for a reusable skill.
+- **OpenClaw**: copy `skills/autonomous-ai-agents/codex-brief-generator/` to either `<workspace>/skills/autonomous-ai-agents/codex-brief-generator/`, `<workspace>/.agents/skills/autonomous-ai-agents/codex-brief-generator/`, or `~/.openclaw/skills/autonomous-ai-agents/codex-brief-generator/`.
+- **Hermes Agent**: copy `skills/autonomous-ai-agents/codex-brief-generator/` to `~/.hermes/skills/autonomous-ai-agents/codex-brief-generator/`, then start a new Hermes session.
+- **Generic AgentSkills loaders**: use the directory that contains `SKILL.md`; the skill name is `codex-brief-generator`.
+
+
 ## Motivation
 
 Long-running local coding and data tasks often do not fit neatly into a single remote agent conversation. In practice, there are three recurring problems:
@@ -54,7 +78,7 @@ It also includes add-ons for:
         └── SKILL.md
 ```
 
-`skills/codex-brief-generator/SKILL.md` is the canonical skill file.
+`skills/autonomous-ai-agents/codex-brief-generator/SKILL.md` is the canonical skill file.
 
 ## Installation in Hermes
 
@@ -97,7 +121,7 @@ Direct Hermes-to-Codex execution is useful for short and well-bounded repository
 This repository follows the Agent Skills layout expected by Hermes:
 
 ```text
-skills/<skill-name>/SKILL.md
+skills/<category>/<skill-name>/SKILL.md
 ```
 
 The skill is written as a plain Markdown instruction file with YAML frontmatter, so it can also be adapted for other agent runtimes that support skill-style instruction packs.
